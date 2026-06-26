@@ -1,12 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wild West Stock Checker</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Market Tracker</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background: #0b0f14;
+    color: #e6e6e6;
+}
+
+/* TOP BAR */
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 14px 20px;
+    background: #111827;
+    border-bottom: 1px solid #1f2937;
+    font-weight: 600;
+}
+
+.status {
+    color: #22c55e;
+    font-size: 12px;
+}
+
+/* CONTAINER */
+.container {
+    padding: 20px;
+}
+
+/* SEARCH */
+.search {
+    width: 100%;
+    padding: 12px;
+    background: #111827;
+    border: 1px solid #1f2937;
+    color: white;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    outline: none;
+}
+
+/* TABLE */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #0f172a;
+    border: 1px solid #1f2937;
+}
+
+th {
+    text-align: left;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #9ca3af;
+    padding: 12px;
+    border-bottom: 1px solid #1f2937;
+}
+
+td {
+    padding: 14px;
+    border-bottom: 1px solid #1f2937;
+    font-size: 14px;
+}
+
+tr:hover {
+    background: #111827;
+}
+
+/* STATUS */
+.status-in { color: #22c55e; }
+.status-out { color: #ef4444; }
+
+/* TREND */
+.trend {
+    font-weight: 600;
+}
+
+/* FOOTER */
+footer {
+    padding: 16px;
+    text-align: center;
+    font-size: 11px;
+    color: #6b7280;
+}
+</style>
 </head>
+
 <body>
-    <h1>Wild West Stock Checker</h1>
-    <p>Your code goes here</p>
+
+<div class="topbar">
+    <div>Market Tracker</div>
+    <div class="status">● MARKET LIVE</div>
+</div>
+
+<div class="container">
+
+<input class="search" id="search" onkeyup="search()" placeholder="Search assets...">
+
+<table id="table">
+
+<tr>
+<th>Asset</th>
+<th>Status</th>
+<th>Price</th>
+<th>Trend</th>
+<th>Chart</th>
+</tr>
+
+<tr>
+<td>GOLD ORE</td>
+<td class="status-in">In Stock</td>
+<td class="price" data-prev="42000">$42,000</td>
+<td class="trend">➜ 0%</td>
+<td>▁▂▃▄▅▆▇█</td>
+</tr>
+
+<tr>
+<td>CATTLE CO</td>
+<td class="status-out">Out of Stock</td>
+<td class="price" data-prev="31200">$31,200</td>
+<td class="trend">➜ 0%</td>
+<td>█▇▆▅▄▃▂▁</td>
+</tr>
+
+<tr>
+<td>SALOON OIL</td>
+<td class="status-in">In Stock</td>
+<td class="price" data-prev="18900">$18,900</td>
+<td class="trend">➜ 0%</td>
+<td>▄▄▄▄▄▄▄▄</td>
+</tr>
+
+</table>
+
+</div>
+
+<footer>
+live market data simulation
+</footer>
+
+<script>
+
+/* SEARCH */
+function search(){
+    let input = document.getElementById("search").value.toUpperCase();
+    let rows = document.getElementById("table").getElementsByTagName("tr");
+
+    for(let i = 1; i < rows.length; i++){
+        let cell = rows[i].getElementsByTagName("td")[0];
+        if(cell){
+            let txt = cell.textContent || cell.innerText;
+            rows[i].style.display = txt.toUpperCase().includes(input) ? "" : "none";
+        }
+    }
+}
+
+/* FORMAT */
+function formatNumber(num){
+    return "$" + Math.round(num).toLocaleString();
+}
+
+/* LIVE MARKET SIMULATION */
+setInterval(() => {
+    let rows = document.querySelectorAll("#table tr");
+
+    for(let i = 1; i < rows.length; i++){
+        let priceCell = rows[i].querySelector(".price");
+        let trendCell = rows[i].querySelector(".trend");
+
+        if(!priceCell || !trendCell) continue;
+
+        let prev = parseFloat(priceCell.getAttribute("data-prev"));
+        let current = parseFloat(priceCell.innerText.replace("$","").replace(/,/g,""));
+
+        let change = (Math.random() - 0.5) * 2000;
+        let newPrice = Math.max(100, current + change);
+
+        priceCell.innerText = formatNumber(newPrice);
+
+        let diff = newPrice - prev;
+        let percent = ((diff / prev) * 100).toFixed(2);
+
+        let arrow = "➜";
+        let color = "#facc15";
+
+        if(diff > 0){
+            arrow = "▲";
+            color = "#22c55e";
+        } else if(diff < 0){
+            arrow = "▼";
+            color = "#ef4444";
+        }
+
+        trendCell.innerText = `${arrow} ${percent}%`;
+        trendCell.style.color = color;
+
+        priceCell.setAttribute("data-prev", newPrice);
+    }
+
+}, 3000);
+
+</script>
+
 </body>
 </html>
