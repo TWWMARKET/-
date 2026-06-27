@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64" height="64" viewBox="0 0 64 64">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="256" height="256" viewBox="0 0 256 256">
   <defs>
     <style>
       .rifle-barrel { fill: #2c3e50; }
@@ -9,20 +9,24 @@
     </style>
   </defs>
   
-  <!-- Rifle barrel -->
-  <rect class="rifle-barrel" x="8" y="20" width="36" height="6" rx="3"/>
+  <!-- Rifle barrel - LARGER -->
+  <rect class="rifle-barrel" x="30" y="90" width="150" height="20" rx="10"/>
   
-  <!-- Rifle stock/handle -->
-  <path class="rifle-stock" d="M 42 20 L 56 12 L 58 18 L 52 26 Z"/>
+  <!-- Rifle stock/handle - BIGGER -->
+  <path class="rifle-stock" d="M 170 90 L 230 40 L 245 65 L 200 110 Z"/>
   
-  <!-- Rifle details -->
-  <rect class="rifle-detail" x="44" y="22" width="2" height="4"/>
-  <rect class="rifle-detail" x="48" y="22" width="2" height="4"/>
-  <rect class="rifle-detail" x="52" y="22" width="2" height="4"/>
+  <!-- Rifle details - BIGGER -->
+  <rect class="rifle-detail" x="175" y="85" width="8" height="16"/>
+  <rect class="rifle-detail" x="195" y="85" width="8" height="16"/>
+  <rect class="rifle-detail" x="215" y="85" width="8" height="16"/>
   
-  <!-- Accent details -->
-  <rect class="rifle-accent" x="10" y="18" width="28" height="2"/>
-  <circle class="rifle-accent" cx="14" cy="23" r="1.5"/>
-  <circle class="rifle-accent" cx="22" cy="23" r="1.5"/>
-  <circle class="rifle-accent" cx="30" cy="23" r="1.5"/>
+  <!-- Accent details - MORE VISIBLE -->
+  <rect class="rifle-accent" x="35" y="75" width="120" height="8"/>
+  <circle class="rifle-accent" cx="50" cy="100" r="6"/>
+  <circle class="rifle-accent" cx="90" cy="100" r="6"/>
+  <circle class="rifle-accent" cx="130" cy="100" r="6"/>
+  
+  <!-- Scope on top -->
+  <circle class="rifle-barrel" cx="110" cy="70" r="8"/>
+  <rect class="rifle-barrel" x="105" y="55" width="10" height="15"/>
 </svg>
