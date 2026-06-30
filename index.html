@@ -1,4 +1,25 @@
 <!DOCTYPE html>
+const MAINTENANCE_MODE = false;
+<script>
+if (MAINTENANCE_MODE) {
+    document.body.innerHTML = `
+        <div style="
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            height:100vh;
+            background:#070a0f;
+            color:white;
+            font-family:Arial,sans-serif;
+            font-size:48px;
+            font-weight:bold;
+        ">
+            Currently Down for Maintenance
+        </div>
+    `;
+    throw new Error("Maintenance Mode");
+}
+</script>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -115,7 +136,6 @@ tr:hover {
 
 <div class="topbar">
     <div>WILD WEST MARKET TERMINAL</div>
-    <div>● DATABASE ACTIVE</div>
 </div>
 
 <div class="wrapper">
